@@ -1,0 +1,17 @@
+{
+    "name": "silverbullet-serendipity",
+    "version": "0.0.1",
+    "author": "Pantelis Vratsalis",
+    "scripts": {
+      "build": "plugos-bundle --exclude yaml handlebars @lezer/lr -- serendipity.plug.yaml",
+      "start": "plugos-bundle -w --exclude yaml handlebars @lezer/lr -- serendipity.plug.yaml"
+    },
+    "dependencies": {
+      "@silverbulletmd/plugos-silverbullet-syscall": "^0.0.35",
+      "@plugos/plugos-syscall": "^0.0.35",
+      "@silverbulletmd/plugs": "^0.0.35"
+    },
+    "devDependencies": {
+      "@plugos/plugos": "^0.0.26"
+    }
+  }

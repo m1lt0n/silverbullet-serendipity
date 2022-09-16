@@ -1,0 +1,23 @@
+{
+  "name": "serendipity",
+  "functions": {
+    "randomPageCommand": {
+      "command": {
+        "name": "Serendipity: Open Random Page"
+      },
+      "code": "(() => { var mod=(()=>{var i=Object.defineProperty;var c=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var p=Object.prototype.hasOwnProperty;var l=(t,e)=>{for(var r in e)i(t,r,{get:e[r],enumerable:!0})},d=(t,e,r,s)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let n of g(e))!p.call(t,n)&&n!==r&&i(t,n,{get:()=>e[n],enumerable:!(s=c(e,n))||s.enumerable});return t};var f=t=>d(i({},\"__esModule\",{value:!0}),t);var x={};l(x,{default:()=>h});typeof self>\"u\"&&(self={syscall:(t,...e)=>{throw new Error(\"Not implemented here\")}});var o=self.syscall;async function a(t=!1){return o(\"space.listPages\",t)}function u(t,e,r=!1){return o(\"editor.navigate\",t,e,r)}var P=self.syscall;async function m(){let e=(await a()).map(r=>r.name);await u(e[Math.floor(Math.random()*e.length)])}var h=m;return f(x);})();\n return mod;})()"
+    },
+    "randomPageWithTag": {
+      "command": {
+        "name": "Serendipity: Open Random Page with Tag"
+      },
+      "code": "(() => { var mod=(()=>{var a=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var h=Object.prototype.hasOwnProperty;var P=(t,e)=>{for(var r in e)a(t,r,{get:e[r],enumerable:!0})},x=(t,e,r,o)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let n of f(e))!h.call(t,n)&&n!==r&&a(t,n,{get:()=>e[n],enumerable:!(o=d(e,n))||o.enumerable});return t};var y=t=>x(a({},\"__esModule\",{value:!0}),t);var w={};P(w,{default:()=>v});typeof self>\"u\"&&(self={syscall:(t,...e)=>{throw new Error(\"Not implemented here\")}});var i=self.syscall;function u(t,e,r=!1){return i(\"editor.navigate\",t,e,r)}function m(t,e=\"\"){return i(\"editor.prompt\",t,e)}var c=self.syscall;async function g(t,e,r){return new Promise((o,n)=>{let s=-1;r&&(s=setTimeout(()=>{console.log(\"Timeout!\"),n(\"timeout\")},r)),c(\"event.dispatch\",t,e).then(l=>{s!==-1&&clearTimeout(s),o(l)}).catch(n)})}async function p(){let t=await m(\"Random page should include the following tag:\");if(!t)return;let e=await g(\"query:page\",{query:{table:\"page\",filter:[{op:\"=\",prop:\"tags\",value:t}]}},10*1e3);e[0].length!==0&&await u(e[0].map(r=>r.name)[Math.floor(Math.random()*e.length)])}var v=p;return y(w);})();\n return mod;})()"
+    },
+    "randomPageFromSearch": {
+      "command": {
+        "name": "Serendipity: Open Random Page with Search Term"
+      },
+      "code": "(() => { var mod=(()=>{var a=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var h=Object.prototype.hasOwnProperty;var P=(t,e)=>{for(var r in e)a(t,r,{get:e[r],enumerable:!0})},x=(t,e,r,o)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let n of f(e))!h.call(t,n)&&n!==r&&a(t,n,{get:()=>e[n],enumerable:!(o=d(e,n))||o.enumerable});return t};var y=t=>x(a({},\"__esModule\",{value:!0}),t);var w={};P(w,{default:()=>v});typeof self>\"u\"&&(self={syscall:(t,...e)=>{throw new Error(\"Not implemented here\")}});var i=self.syscall;function u(t,e,r=!1){return i(\"editor.navigate\",t,e,r)}function m(t,e=\"\"){return i(\"editor.prompt\",t,e)}var c=self.syscall;async function g(t,e,r){return new Promise((o,n)=>{let s=-1;r&&(s=setTimeout(()=>{console.log(\"Timeout!\"),n(\"timeout\")},r)),c(\"event.dispatch\",t,e).then(l=>{s!==-1&&clearTimeout(s),o(l)}).catch(n)})}async function p(){let t=await m(\"Random page should include the following search term:\");if(!t)return;let e=await g(\"query:full-text\",{query:{table:\"page\",filter:[{op:\"=\",prop:\"phrase\",value:t}]}});e[0].length!==0&&await u(e[0].map(r=>r.name)[Math.floor(Math.random()*e.length)])}var v=p;return y(w);})();\n return mod;})()"
+    }
+  }
+}
